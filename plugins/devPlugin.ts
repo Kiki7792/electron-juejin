@@ -39,7 +39,7 @@ export const getReplacer = () => {
 			code: `const ${item} = require('${item}');export { ${item} as default }`
 		});
 	}
-	result.electron = () => {
+	result['electron'] = () => {
 		const electronModules = ["clipboard", "ipcRenderer", "nativeImage", "shell", "webFrame"].join(",");
 		return {
 			find: new RegExp("^electron$"),
