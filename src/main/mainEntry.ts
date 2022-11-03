@@ -1,6 +1,9 @@
 import { app, BrowserWindow } from "electron";
 import { CustomScheme } from './CustomScheme'
 
+// 禁用當前應用程序的硬件加速
+app.disableHardwareAcceleration()
+
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = "true"; // true: 不显示 electron 警告
 
 let mainWindow: BrowserWindow;
