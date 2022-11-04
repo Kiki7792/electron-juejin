@@ -8,6 +8,7 @@ import { buildPlugin } from "./plugins/buildPlugin";
 export default defineConfig({
 	plugins: [optimizer(getReplacer()), devPlugin(), vue()],
 	build: {
+		assetsInlineLimit: 0,
 		rollupOptions: {
 			plugins: [buildPlugin()]
 		}

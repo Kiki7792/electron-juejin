@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: '/WindowMain',
-    compoent: () => import('../Window/WindowMain.vue'),
+    component: () => import('../Window/WindowMain.vue'),
     children: [
       {
         path: 'Chat',
@@ -41,7 +41,7 @@ const routes = [
   }
 ]
 
-export const router = createRouter({
+export let router = createRouter({
   history: createWebHistory(), // 與 CustomScheme 兼容得很好
   routes
 })
