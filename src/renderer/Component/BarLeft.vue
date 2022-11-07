@@ -41,13 +41,14 @@ watch(
 
 // open setting window
 let openSettingWindow = async () => {
-  let config = { modal: true, width: 800, webPreferences: { webviewTag: false } }
+  let config = { modal: true, width: 600, webPreferences: { webviewTag: false } }
   let dialog = await createDialog(`/WindowSetting/AccountSetting`, config)
+  console.log('mm--', dialog)
   window.addEventListener('message', (e) => {
     console.log('bar-left==', e.data)
   })
   
-  let msg = { msgName: 'hello', value: 'msg from your parent' }
+  let msg = { msgName: '__dialogReady', value: 'msg from your parent' }
   dialog.postMessage(msg)
 
   // window.open(`/WindowSetting/AccountSetting`, '_blank', JSON.stringify(config))
