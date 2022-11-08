@@ -41,7 +41,7 @@ watch(
 
 // open setting window
 let openSettingWindow = async () => {
-  let config = { modal: true, width: 600, webPreferences: { webviewTag: false } }
+  let config = { modal: false, width: 600, webPreferences: { webviewTag: false } }
   let dialog = await createDialog(`/WindowSetting/AccountSetting`, config)
   console.log('mm--', dialog)
   window.addEventListener('message', (e) => {

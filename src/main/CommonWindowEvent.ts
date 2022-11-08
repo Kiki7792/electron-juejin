@@ -44,6 +44,14 @@ export class CommonWindowEvent {
     });
     //@ts-ignore
     win.webContents.setWindowOpenHandler((param) => {
+      // 主窗口默认id是1，新建的子窗口+1=2，放入Array的第一个
+      for(let item of BrowserWindow.getAllWindows()) {
+        if (item.id >= 2) {
+          item.show()
+          return { action: "deny" }
+        }
+      }
+
       let config = {
         frame: false,
         show: true,
@@ -73,8 +81,9 @@ export class CommonWindowEvent {
       }
       //@ts-ignore
       if (config["modal"] === true) config.parent = win;
-      
+
       return { action: "allow", overrideBrowserWindowOptions: config };
+
     });
   }
 }
