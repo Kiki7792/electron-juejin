@@ -1,6 +1,6 @@
 export let createDialog = (url: string, config: any): Promise<Window> => {
   return new Promise((resolve, reject) => {
-    let windowProxy = window.open(url, '_blank', JSON.stringify(config))
+    let windowProxy = window.open(url, '_blank', JSON.stringify(config)) as Window
     let readyHandler = (e: any) => {
       let msg = e.data
       if (msg['msgName'] === `__dialogReady`) {
@@ -11,6 +11,10 @@ export let createDialog = (url: string, config: any): Promise<Window> => {
     }
 
     window.addEventListener('message', readyHandler)
+    windowProxy.addEventListener("close", () => {
+      console.log("window close");
+      windowProxy.removeEventListener("message", readyHandler);
+    });
   })
 }
 

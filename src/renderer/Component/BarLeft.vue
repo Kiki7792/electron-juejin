@@ -19,7 +19,7 @@
 <script lang='ts' setup>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { createDialog } from '../common/Dialog'
+import { createDialog } from '../Common/Dialog'
 
 // 菜單列表數組
 let mainWindowRoutes = ref([
@@ -39,19 +39,17 @@ watch(
   }
 )
 
+window.addEventListener('message', (e) => {
+  console.log('bar-left==', e.data)
+})
+
 // open setting window
 let openSettingWindow = async () => {
   let config = { modal: false, width: 600, webPreferences: { webviewTag: false } }
   let dialog = await createDialog(`/WindowSetting/AccountSetting`, config)
-  console.log('mm--', dialog)
-  window.addEventListener('message', (e) => {
-    console.log('bar-left==', e.data)
-  })
   
-  let msg = { msgName: '__dialogReady', value: 'msg from your parent' }
+  let msg = { msgName: 'hello', value: 'msg from your parent' }
   dialog.postMessage(msg)
-
-  // window.open(`/WindowSetting/AccountSetting`, '_blank', JSON.stringify(config))
 }
 </script>
 
