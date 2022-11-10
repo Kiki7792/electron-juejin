@@ -1,16 +1,17 @@
 <template>
   <div class="chat">
-    <BarTop />
-    Chat
+    <ChatBoard />
+    <MessageBoard />
   </div>
 </template>
 
 <script lang='ts' setup>
-import BarTop from '../../Component/BarTop.vue';
+import ChatBoard from "./Chat/ChatBoard.vue";
+import MessageBoard from "./Chat/MessageBoard.vue";
 </script>
 <style lang="scss" scoped>
 .chat {
+  display: flex;
   width: 100%;
-  
 }
 </style>

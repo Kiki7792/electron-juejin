@@ -65,7 +65,7 @@ onUnmounted(() => {
   display: flex;
   height: 25px;
   line-height: 25px;
-  -webkit-app-region: drag; /* 可拖拽区域 */
+  -webkit-app-region: drag;
   width: 100%;
 }
 .winTitle {
@@ -77,7 +77,7 @@ onUnmounted(() => {
 .winTool {
   height: 100%;
   display: flex;
-  -webkit-app-region: no-drag; /* 可拖拽区域内的不可拖拽区域 */
+  -webkit-app-region: no-drag;
 }
 .winTool div {
   height: 100%;
