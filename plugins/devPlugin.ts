@@ -31,7 +31,7 @@ export const devPlugin = () => {
 };
 
 export const getReplacer = () => {
-	const externalModels = ["os", "fs", "path", "events", "child_process", "crypto", "http", "buffer", "url", "better-sqlite3", "knex"];
+	const externalModels = ["os", "fs", "fs-extra", "path", "events", "child_process", "crypto", "http", "buffer", "url", "better-sqlite3", "knex"];
 	const result = {};
 	for (const item of externalModels) {
 		result[item] = () => ({

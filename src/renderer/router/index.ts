@@ -1,8 +1,8 @@
 // import * as VueRouter from 'vue-router'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 // 路由規則描述數組
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     redirect: '/WindowMain/Chat'
