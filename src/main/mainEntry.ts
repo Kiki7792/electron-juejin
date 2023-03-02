@@ -1,6 +1,7 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { CustomScheme } from './CustomScheme'
 import { CommonWindowEvent } from './CommonWindowEvent'
+import PKG from '../../package.json'
 
 // 禁用當前應用程序的硬件加速
 // app.disableHardwareAcceleration()
@@ -15,9 +16,16 @@ app.on('browser-window-created', (e, win) => {
 let mainWindow: BrowserWindow;
 
 app.whenReady().then(() => {
+  monitorRenderer()
+  createMainWindow()
+});
+
+function createMainWindow() {
   let config = {
-    frame: false,
+    frame: true,
+    autoHideMenuBar: false,
     show: false,
+    movable: false,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
@@ -30,6 +38,7 @@ app.whenReady().then(() => {
   };
 
   mainWindow = new BrowserWindow(config);
+  mainWindow.setMenu(null)
 
   mainWindow.webContents.openDevTools({ mode: "undocked" });
 
@@ -40,4 +49,22 @@ app.whenReady().then(() => {
     mainWindow.loadURL(`app://index.html`);
   }
   CommonWindowEvent.listen();
-});
+
+  mainWindow.on('ready-to-show', () => {
+    showMainWindow()
+  })
+}
+
+//* 显示 主窗口（main-render）
+function showMainWindow() {
+  if (!mainWindow) return
+  mainWindow.show()
+}
+
+//* 监听渲染进程
+function monitorRenderer() {
+  // 获取应用标题
+  ipcMain.on('query_title', () => {
+    mainWindow && mainWindow.webContents.send('get_title', { name: PKG.name, version: PKG.version })
+  })
+}
